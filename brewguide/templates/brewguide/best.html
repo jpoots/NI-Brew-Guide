@@ -1,0 +1,30 @@
+{% extends "brewguide/layout.html" %}
+{% load static %}
+{% block body %}
+    <div class="container">
+        
+        {% for shop in shops %}
+            <div class="indexShop">
+                <img class="imageIndex" src="{{ shop.coverImage.url }}">
+                <div class="indexInfo">
+                    <div>
+                        <a class="indexShopName" href="{% url 'shop' shop.name %}">{{ shop.name|title }}</a>
+                    </div>
+                    <div id="locationInfo">{{ shop.location|title }}</div>
+                    <div id="serves">Rating: {{ shop.rating }}/5</div>
+                    <div id="serves">Serves:</div>
+                    <div>
+                        {% if shop.lunch %}
+                            <i class="fa-solid fa-utensils fa-2xl"></i>
+                        {% endif %}
+
+                        {% if shop.traybakes %}
+                            <i class="fa-solid fa-cookie-bite fa-2xl"></i>
+                        {% endif %}
+                </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

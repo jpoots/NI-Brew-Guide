@@ -1,0 +1,54 @@
+{% extends "brewguide/layout.html" %}
+{% block body %}
+    <div class="container"> <!-- Based on bootstrap example code-->
+        <div id="carouselContainerLarge">
+            <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+
+                    {% for image in images %}
+                        {% if forloop.first %}
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="{{ image.image.url }}" alt="">
+                            </div>
+                        {% else %}
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="{{ image.image.url }}" alt="">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+        
+                </div>
+    
+                <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div>
+            <div class="indexInfo">
+                <div>
+                    <a class="indexShopName">Welcome!</a>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="about">
+                <p>Here at NI Brew Guide we care about one thing above all, coffee done right. Speciality coffee made by trained staff who can get a delcious cup from the raw materials.</p>
+                <p>As my countrymen will know, we have this in abundance for such a small country. This website
+                    seeks to serve this scene and its frequenters along with supporting lesser known coffee
+                    shops from around the country which get missed due to not being in Belfast or on the North Coast.</p>
+                <p>While we admit shops based soley on coffee, we encourage our user to leave reviews about the overall
+                    experience to give others an idea. You can rest assured any shop on this site reaches the standards of
+                    the admin.</p>
+
+                <p>Please, enjoy using the website at your leisure.</p>
+                <p>- Jordan</p>
+            </div>
+        </div>
+{% endblock %}

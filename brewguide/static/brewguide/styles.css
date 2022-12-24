@@ -1,0 +1,101 @@
+.account {
+    margin-right: 0 !important;
+}
+
+.indexShop{
+    border-bottom: 2px solid lightgrey;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.indexShopName, .indexShopName:hover{
+    font-family: "Impact";
+    font-size: 40px;
+    color: black;
+}
+
+.indexImage{
+    display: inline;
+}
+
+.indexInfo{
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+    display: inline-block;
+}
+
+
+#locationForm{
+    display: inline-block;
+}
+
+#locationSubmit{
+    margin-top: 5px;
+}
+
+#locationSelectBtn{
+    margin: 5px;
+}
+
+#buttons{
+        display: flex;
+        justify-content: space-between;
+}
+
+#locationInfo{
+    margin-top: -10px;
+    font-family: "Impact";
+    font-size: 30px;
+
+}
+
+#serves{
+    font-family: "Impact";
+    font-size: 25px;
+}
+
+#carouselContainer{
+    width: 300px;
+    display: inline-block;
+}
+
+.about{
+    font-family: 'Courier New', monospace;
+}
+
+#description{
+    font-family: 'Courier New', monospace;
+}
+
+.review{
+    margin-top: 5px;
+    padding: 5px; 
+    border: 2px solid lightgray;
+    border-radius: 20px;
+}
+
+.author{
+    font-weight: bold;
+}
+
+iframe{
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+@media (max-width: 528px){
+
+    #serves{
+        font-size: 15px;
+    }
+
+    .indexShopName, .indexShopName:hover{
+        font-size: 30px;
+    }
+
+    #locationInfo{
+        font-size: 20px;
+    
+    }
+}

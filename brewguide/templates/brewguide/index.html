@@ -1,0 +1,91 @@
+{% extends "brewguide/layout.html" %}
+{% load static %}
+{% block body %}
+    <div class="container">
+        <form action="{% url 'index' %}" method="POST" id="locationForm">
+            {% csrf_token %}
+            <input type="hidden" name="long" id="long" value="">
+            <input type="hidden" name="lat" id="lat" value="">
+        </form>
+        <div id="buttons">
+            <button id="locationSubmit" class="btn btn-primary">Shops near me</button>
+            {% if not personal %}
+                <form action="{% url 'index' %}" method="POST" id="locationForm">
+                    {% csrf_token %}
+                    <select id="location" name="locationRequest">
+                            <option value="" disabled selected>Choose a Location</option>
+                        {% for location in locations %}
+                            <option value="{{ location.name }}">{{ location.name|title }}</option>
+                        {% endfor %}
+                        <input type="submit" value="Search" class="btn btn-secondary" id="locationSelectBtn">
+                    </select>
+                </form>
+            {% endif %}
+        </div>
+
+        {% for shop in shops %}
+            <div class="indexShop">
+                <img class="imageIndex" src="{{ shop.coverImage.url }}">
+                <div class="indexInfo">
+                    <div>
+                        <a class="indexShopName" href="{% url 'shop' shop.name %}">{{ shop.name|title }}</a>
+                    </div>
+                    <div id="locationInfo">{{ shop.location|title }}</div>
+                    <div id="serves">Rating: {{ shop.rating }}/5</div>
+                    <div id="serves">Serves:</div>
+                    <div class="serves">
+                        {% if shop.lunch %}
+                            <i class="fa-solid fa-utensils fa-2xl"></i>
+                        {% endif %}
+
+                        {% if shop.traybakes %}
+                            <i class="fa-solid fa-cookie-bite fa-2xl"></i>
+                        {% endif %}
+                </div>
+
+                </div>
+            </div>
+        {% endfor %}
+        
+        {% if pagination %}
+            <nav aria-label="Page navigation">  <!-- Based on bootstrap example code-->
+                <ul class="pagination justify-content-center">
+
+                    <li class="page-item {% if currentPage == 1 %}disabled {% endif %}">
+                        <a class="page-link pageChanger" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <form action="{% url 'index' %}" method="POST" id="Previous">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ currentPage|add:-1 }}" name="pageRequest">
+                    </form>
+
+                    <li class="page-item"><a class="page-link pageChanger">{{ currentPage }}</a></li>
+                    <form action="{% url 'index' %}" method="POST" id="{{ currentPage }}">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ currentPage }}" name="pageRequest">
+                    </form>
+
+                    <li class="page-item {% if currentPage|add:1 > lastPage %}disabled{% endif %}" ><a class="page-link pageChanger">{{ currentPage|add:1 }}</a></li>
+                    <form action="{% url 'index' %}" method="POST" id="{{ currentPage|add:1 }}">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ currentPage|add:1 }}" name="pageRequest">
+                    </form>
+
+                    <li class="page-item {% if currentPage|add:2 > lastPage %}disabled{% endif %}"><a class="page-link pageChanger">{{ currentPage|add:2 }}</a></li>
+                    <form action="{% url 'index' %}" method="POST" id="{{ currentPage|add:2 }}">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ currentPage|add:2 }}" name="pageRequest">
+                    </form>
+
+                    <li class="page-item {% if currentPage >= lastPage %}disabled{% endif %}">
+                        <a class="page-link pageChanger" tabindex="1">Next</a>
+                    </li>
+                    <form action="{% url 'index' %}" method="POST" id="Next">
+                        {% csrf_token %}
+                        <input type="hidden" name="pageRequest" value="{{ currentPage|add:1 }}">
+                    </form>
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+{% endblock %}
